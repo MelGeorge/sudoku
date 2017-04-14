@@ -1,7 +1,9 @@
 #include <iostream>
 #include <stack>
 #include <string>
+#include <vector>
 #include "Sudoku.h"
+#include <fstream>
 
 using namespace std;
 
