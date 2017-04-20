@@ -11,16 +11,17 @@ int main() {
   cout << "Welcome to Sudoku Solver! Stuck?\n";
   
   ifstream infile;
-  infile.open("board.txt");
+  infile.open("board2.txt");
   
-  ofstream outfile;
-  outfile.open("out.txt");
-  Sudoku sudoku(infile, outfile);
+ // ofstream outfile;
+ // outfile.open("out.txt");
+  Sudoku sudoku(infile/*, outfile*/);
   
   sudoku.solve();
+  sudoku.print_solution();
   
   infile.close();
-  outfile.close();
+//  outfile.close();
   
   return 0;
 }
