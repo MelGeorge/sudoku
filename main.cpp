@@ -1,27 +1,52 @@
 #include <iostream>
-#include <stack>
 #include <string>
+#include <stdlib.h>
 #include <vector>
 #include "Sudoku.h"
-#include <fstream>
 
 using namespace std;
 
+void setup_board(vector<vector<int>> &board) {
+    
+  string next;
+  
+  for(size_t row = 0; row < 9; ++row) {
+      board[row].resize(9);
+      for(size_t col = 0; col < 9; ++col) {
+          cin >> next;
+          if(next != "_") {
+              board[row][col] = stoi(next);
+          } else {
+              board[row][col] = -1;
+          }
+      }
+  }
+  
+}
+
+void print_solution(const vector<vector<int>> &board) {
+    for(size_t row = 0; row < 9; ++row) {
+        for(size_t col = 0; col < 9; ++col) {
+            cout << board[row][col] << ' ';
+        }
+        cout << '\n';
+    }
+}
+
 int main() {
-  cout << "Welcome to Sudoku Solver! Stuck?\n";
+  cout << "\nWelcome to Sudoku Solver! Stuck?\n\n";
   
-  ifstream infile;
-  infile.open("board2.txt");
+  vector<vector<int>> board(9);
   
- // ofstream outfile;
- // outfile.open("out.txt");
-  Sudoku sudoku(infile/*, outfile*/);
+  setup_board(board);
+
+  Sudoku sudoku(board);
   
-  sudoku.solve();
-  sudoku.print_solution();
-  
-  infile.close();
-//  outfile.close();
+  if(sudoku.solve()) {
+      print_solution(board);
+  } else {
+      cout << "No solution!\n";
+  }
   
   return 0;
 }
